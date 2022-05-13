@@ -1,0 +1,13 @@
+{
+  "name": "node-boilerplate",
+  "version": "1.0.0",
+  "description": "Node and Express Boilerplate",
+  "main": "index.js",
+  "author": "Bram Adl",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2"
+  }
+}
