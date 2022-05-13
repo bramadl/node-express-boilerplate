@@ -21,8 +21,8 @@
     "lint": "eslint --fix .",
     "pretty": "prettier --write .",
     "prepare": "husky install",
-    "precommit": "npx lint-staged && yarn lint && yarn pretty",
-    "prepush": "npm run lint"
+    "precommit": "yarn lint-staged",
+    "prepush": "yarn lint"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
