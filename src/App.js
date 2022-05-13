@@ -3,7 +3,7 @@ const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
 const httpStatus = require('http-status');
-const xss = require('xss');
+const xss = require('xss-clean');
 
 const ApiError = require('./helpers/ApiError');
 const morgan = require('./lib/morgan');
