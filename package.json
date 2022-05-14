@@ -1,6 +1,6 @@
 {
   "name": "create-node-express-boilerplate-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node and Express Boilerplate",
   "main": "server.js",
   "author": "Bram Adl",
