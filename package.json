@@ -5,6 +5,7 @@
   "main": "server.js",
   "author": "Bram Adl",
   "license": "MIT",
+  "bin": "bin/create-node-express-boilerplate-app",
   "scripts": {
     "start": "cross-env NODE_ENV=production node server.js",
     "dev": "cross-env NODE_ENV=development nodemon server.js",
