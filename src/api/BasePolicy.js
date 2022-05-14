@@ -1,18 +1,22 @@
 class BasePolicy {
-  static allRoles = ['Owner', 'Admin', 'Editor', 'Member'];
+  async allRolesValid(role) {
+    return ['Owner', 'Admin', 'Editor', 'Member'].includes(role);
+  }
 
-  /**
-   * Get the user's role from the given token.
-   *
-   * @param {String} token - The valid JWT token
-   * @returns {String}
-   */
-  getRoleFromToken(token) {
-    // @TODO:
-    // Parse the JWT token here then return the role
-    // eslint-disable-next-line no-console
-    console.log({ token });
-    return 'Owner';
+  ownerPrivileges(role) {
+    return role === 'Owner';
+  }
+
+  adminPrivileges(role) {
+    return role === 'Admin';
+  }
+
+  editorPrivileges(role) {
+    return role === 'Editor';
+  }
+
+  memberPrivileges(role) {
+    return role === 'Member';
   }
 }
 

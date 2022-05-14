@@ -1,29 +1,24 @@
 const BasePolicy = require('../BasePolicy');
 
 class UserPolicy extends BasePolicy {
-  getUsers(token) {
-    const role = super.getRoleFromToken(token);
-    return BasePolicy.allRoles.includes(role);
+  getUsers(role) {
+    return super.allRolesValid(role);
   }
 
-  getUserById(token) {
-    const role = super.getRoleFromToken(token);
-    return BasePolicy.allRoles.includes(role);
+  getUserById(role) {
+    return super.allRolesValid(role);
   }
 
-  createUser(token) {
-    const role = super.getRoleFromToken(token);
-    return role === 'Super Admin';
+  createUser(role) {
+    return super.ownerPrivileges(role);
   }
 
-  updateUser(token) {
-    const role = super.getRoleFromToken(token);
-    return role === 'Super Admin';
+  updateUser(role) {
+    return super.ownerPrivileges(role);
   }
 
-  deleteUser(token) {
-    const role = super.getRoleFromToken(token);
-    return role === 'Super Admin';
+  deleteUser(role) {
+    return super.ownerPrivileges(role);
   }
 }
 
