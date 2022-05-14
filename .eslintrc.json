@@ -8,5 +8,9 @@
   "parserOptions": {
     "ecmaVersion": "latest"
   },
-  "rules": {}
+  "rules": {
+    "import/no-dynamic-require": "off",
+    "class-methods-use-this": "off",
+    "global-require": "off"
+  }
 }
