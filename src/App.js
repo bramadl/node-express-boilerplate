@@ -1,11 +1,15 @@
 const compression = require('compression');
 const cors = require('cors');
 const express = require('express');
+const fs = require('fs');
 const helmet = require('helmet');
 const httpStatus = require('http-status');
+const path = require('path');
 const xss = require('xss-clean');
 
 const ApiError = require('./helpers/ApiError');
+const ErrorContract = require('./helpers/ErrorContract');
+const logger = require('./lib/logger');
 const morgan = require('./lib/morgan');
 const { errorConverter, errorHandler } = require('./utils/error');
 
@@ -21,6 +25,7 @@ class Application {
 
     this.installMiddlewares();
     this.installRouteHandlers();
+    this.installCustomHandlers();
   }
 
   installMiddlewares() {
@@ -44,7 +49,38 @@ class Application {
     // Enable cors
     this.app.use(cors());
     this.app.options('*', cors());
+  }
 
+  /**
+   * Install the API routes from the api directory using
+   * automatic discovery.
+   */
+  installRouteHandlers() {
+    // this.app.use(swaggerRoute);
+
+    const apiDiscoveries = fs.readdirSync(`${__dirname}/api`);
+
+    if (!apiDiscoveries) throw new Error(ErrorContract.NO_API_FOLDER);
+    if (!apiDiscoveries.length) throw new Error(ErrorContract.NO_API_FILES);
+
+    apiDiscoveries.forEach((directory) => {
+      if (directory.indexOf('.js') === -1) {
+        try {
+          const { name, router } = require(path.join(
+            `${__dirname}/api/${directory}`,
+          ));
+          if (name && router) this.app.use(`/api/${name}`, router);
+        } catch (error) {
+          logger.error(error);
+        }
+      }
+    });
+  }
+
+  /**
+   * Install custom error handlers.
+   */
+  installCustomHandlers() {
     // Not found error handler.
     this.app.use((req, res, next) => {
       next(new ApiError(httpStatus.NOT_FOUND, 'Resource could not be found.'));
@@ -55,14 +91,6 @@ class Application {
 
     // Central error handler.
     this.app.use(errorHandler);
-  }
-
-  installRouteHandlers() {
-    // this.app.use(swaggerRoute);
-
-    this.app.get('/', (req, res) => {
-      res.send('OK');
-    });
   }
 
   /**
