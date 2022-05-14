@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const Joi = require('joi');
 
 const { error } = dotenv.config({ path: path.join(__dirname, '../../.env') });
-if (process.env.NODE_APP === 'development' && error) throw new Error('No environment file found.');
+if (process.env.NODE_ENV === 'development' && error) throw new Error('No environment file found.');
 
 // Validate the environment
 const envSchema = Joi.object()
