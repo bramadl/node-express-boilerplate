@@ -12,17 +12,32 @@ class AuthService {
       id,
       role: { name: roleName },
     } = user;
-    return jwt.sign(
+
+    const exp = moment().add(expiry, 'minutes').unix();
+
+    const token = jwt.sign(
       {
         sub: id,
         iat: moment().unix(),
-        exp: moment().add(expiry, 'minutes').unix(),
+        exp,
         role: roleName,
       },
       secret,
     );
+
+    return {
+      expiredIn: exp,
+      token,
+    };
   }
 
+  /**
+   * Sign in the user using email and password strategy.
+   *
+   * @param {String} email - The user email
+   * @param {String} password - The user password
+   * @returns {Promise<User>}
+   */
   async signInWithEmailPassword(email, password) {
     return {
       id: 0,
@@ -37,6 +52,15 @@ class AuthService {
     };
   }
 
+  /**
+   * Sign up the user using email and password strategy.
+   *
+   * @param {String} firstName - The user's first name
+   * @param {String} lastName - The user's last name
+   * @param {String} email - The user email
+   * @param {String} password - The user password
+   * @returns {Promise<User>}
+   */
   async signUpWithEmailPassword(firstName, lastName, email, password) {
     return {
       id: 0,

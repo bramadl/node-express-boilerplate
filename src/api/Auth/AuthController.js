@@ -22,7 +22,7 @@ class UserController extends BaseController {
   }
 
   /**
-   * Register the user
+   * Register the user.
    *
    * @param {Express.Request} req
    * @param {Express.Response} res
