@@ -7,6 +7,7 @@ const httpStatus = require('http-status');
 const path = require('path');
 const xss = require('xss-clean');
 
+const swagger = require('./docs/swaggerRoute');
 const ApiError = require('./helpers/ApiError');
 const ErrorContract = require('./helpers/ErrorContract');
 const logger = require('./lib/logger');
@@ -56,7 +57,7 @@ class Application {
    * automatic discovery.
    */
   installRouteHandlers() {
-    // this.app.use(swaggerRoute);
+    this.app.use(swagger);
 
     const apiDiscoveries = fs.readdirSync(`${__dirname}/api`);
 
