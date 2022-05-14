@@ -1,10 +1,13 @@
 {
-  "name": "node-boilerplate",
+  "name": "node-express-boilerplate-app",
   "version": "1.0.0",
   "description": "Node and Express Boilerplate",
   "main": "server.js",
   "author": "Bram Adl",
   "license": "MIT",
+  "bin": {
+    "create-node-express-boilerplate-app": "bin/create-node-express-boilerplate-app"
+  },
   "scripts": {
     "start": "cross-env NODE_ENV=production node server.js",
     "dev": "cross-env NODE_ENV=development nodemon server.js",
