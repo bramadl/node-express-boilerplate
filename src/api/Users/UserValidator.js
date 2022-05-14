@@ -16,7 +16,8 @@ const getUser = {
 
 const createUser = {
   body: {
-    name: Joi.string().required(),
+    first_name: Joi.string().max(20).allow(null),
+    last_name: Joi.string().max(30).required(),
     email: Joi.string().email().required(),
     phone: Joi.string().optional(),
   },
@@ -27,7 +28,8 @@ const updateUser = {
     id: Joi.string().required(),
   },
   body: {
-    name: Joi.string().required(),
+    first_name: Joi.string().max(20).allow(null),
+    last_name: Joi.string().max(30).required(),
     email: Joi.string().email().required(),
     phone: Joi.string().optional(),
   },
