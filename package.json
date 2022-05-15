@@ -20,6 +20,7 @@
     "*.{js,css,md}": "prettier --write"
   },
   "dependencies": {
+    "@prisma/client": "^3.14.0",
     "bcrypt": "^5.0.1",
     "chalk": "^4.1.1",
     "compression": "^1.7.4",
@@ -46,6 +47,7 @@
     "husky": "^8.0.1",
     "lint-staged": ">=10",
     "nodemon": "^2.0.16",
-    "prettier": "2.6.2"
+    "prettier": "2.6.2",
+    "prisma": "^3.14.0"
   }
 }
