@@ -91,6 +91,9 @@ module.exports = {
           403: {
             $ref: '#/components/responses/Forbidden',
           },
+          404: {
+            $ref: '#/components/responses/NotFound',
+          },
         },
       },
     },
@@ -106,11 +109,11 @@ module.exports = {
               schema: {
                 type: 'object',
                 properties: {
-                  first_name: {
+                  firstName: {
                     type: 'string',
                     description: "The user's first name.",
                   },
-                  last_name: {
+                  lastName: {
                     type: 'string',
                     description: "The user's last name.",
                   },
@@ -125,7 +128,7 @@ module.exports = {
                     description: "The user's plain password.",
                   },
                 },
-                required: ['last_name', 'email', 'password'],
+                required: ['lastName', 'email', 'password'],
               },
             },
           },
@@ -163,6 +166,9 @@ module.exports = {
           403: {
             $ref: '#/components/responses/Forbidden',
           },
+          409: {
+            $ref: '#/components/responses/Conflict',
+          },
         },
       },
     },
@@ -178,7 +184,7 @@ module.exports = {
             name: 'search',
             required: false,
             description:
-              'What to search within the data? Supported to search **first_name**, **last_name**, **email**, and **phone_number** currently.',
+              'What to search within the data? Supported to search **firstName**, **lastName**, **email**, and **phoneNumber** currently.',
             schema: {
               type: 'string',
             },
@@ -232,6 +238,9 @@ module.exports = {
                           },
                         },
                       },
+                    },
+                    pagination: {
+                      $ref: '#/components/schemas/Pagination',
                     },
                   },
                 },
@@ -379,6 +388,9 @@ module.exports = {
           403: {
             $ref: '#/components/responses/Forbidden',
           },
+          404: {
+            $ref: '#/components/responses/NotFound',
+          },
           409: {
             $ref: '#/components/responses/Conflict',
           },
@@ -401,6 +413,9 @@ module.exports = {
           403: {
             $ref: '#/components/responses/Forbidden',
           },
+          404: {
+            $ref: '#/components/responses/NotFound',
+          },
         },
       },
     },
@@ -412,7 +427,8 @@ module.exports = {
         name: 'id',
         required: true,
         schema: {
-          type: 'integer',
+          type: 'string',
+          format: 'uuid',
         },
         description: 'The user ID',
       },
@@ -541,22 +557,22 @@ module.exports = {
             schema: {
               type: 'object',
               properties: {
-                first_name: {
+                firstName: {
                   type: 'string',
                 },
-                last_name: {
+                lastName: {
                   type: 'string',
                 },
                 email: {
                   type: 'string',
                   format: 'email',
                 },
-                phone: {
+                phoneNumber: {
                   type: 'string',
                   example: '081234567890',
                 },
               },
-              required: ['last_name', 'email'],
+              required: ['lastName', 'email'],
             },
           },
         },
@@ -572,6 +588,23 @@ module.exports = {
       },
     },
     schemas: {
+      Pagination: {
+        type: 'object',
+        properties: {
+          currentPage: {
+            type: 'number',
+          },
+          perPage: {
+            type: 'number',
+          },
+          totalItems: {
+            type: 'number',
+          },
+          totalPages: {
+            type: 'number',
+          },
+        },
+      },
       Token: {
         type: 'object',
         properties: {
@@ -591,19 +624,19 @@ module.exports = {
         type: 'object',
         properties: {
           id: {
-            type: 'integer',
-            format: 'int64',
+            type: 'string',
+            format: 'uuid',
           },
-          first_name: {
+          firstName: {
             type: 'string',
           },
-          last_name: {
+          lastName: {
             type: 'string',
           },
           email: {
             type: 'string',
           },
-          phone: {
+          phoneNumber: {
             type: 'string',
           },
           role: {
@@ -619,7 +652,7 @@ module.exports = {
             },
           },
         },
-        required: ['id', 'last_name', 'email', 'role'],
+        required: ['id', 'lastName', 'email', 'role'],
       },
     },
   },
