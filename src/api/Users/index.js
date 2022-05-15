@@ -20,7 +20,7 @@ router.get(
   '/:id',
   auth(userPolicy.getUserById),
   validate(userValidator.getUser),
-  userController.index,
+  userController.show,
 );
 
 router.post(
