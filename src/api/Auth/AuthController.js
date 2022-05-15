@@ -31,10 +31,7 @@ class UserController extends BaseController {
   async register(req, res, next) {
     try {
       const {
-        first_name: firstName,
-        last_name: lastName,
-        email,
-        password,
+        firstName, lastName, email, password,
       } = req.body;
 
       const user = await AuthService.signUpWithEmailPassword(
